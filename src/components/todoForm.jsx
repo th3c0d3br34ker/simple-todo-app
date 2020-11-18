@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
-
 import propTypes from 'prop-types';
 import styled from 'styled-components';
+import { useState } from 'react';
 
 const StyledForm = styled.form`
   margin: 0;
@@ -28,7 +27,7 @@ const AddButton = styled.button`
   }
 `;
 
-export default function TodoForm(props) {
+const TodoForm = ({ onSubmit }) => {
   const [text, setText] = useState('');
 
   const handleChange = (event) => {
@@ -39,7 +38,7 @@ export default function TodoForm(props) {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (text !== '') {
-      props.onSubmit({
+      onSubmit({
         id: parseInt(Date.now() % 10000, 10),
         text: text,
         complete: false,
@@ -63,7 +62,9 @@ export default function TodoForm(props) {
       </AddButton>
     </StyledForm>
   );
-}
+};
+
+export default TodoForm;
 
 TodoForm.propTypes = {
   onSubmit: propTypes.func,

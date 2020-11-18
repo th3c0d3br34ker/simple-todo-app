@@ -1,4 +1,3 @@
-import React from 'react';
 import propTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -20,15 +19,15 @@ const ButtonWrapper = styled.div`
   justify-content: space-between;
 `;
 
-export default function TodoButtons(props) {
-  return (
-    <ButtonWrapper>
-      <StyledButton onClick={props.onShowMarked}>Marked TODOs</StyledButton>
-      <StyledButton onClick={props.onShowUnMarked}>Unmarked TODOs</StyledButton>
-      <StyledButton onClick={props.onShowAll}>All TODOs</StyledButton>
-    </ButtonWrapper>
-  );
-}
+const TodoButtons = ({ onShowAll, onShowMarked, onShowUnMarked }) => (
+  <ButtonWrapper>
+    <StyledButton onClick={onShowMarked}>Marked TODOs</StyledButton>
+    <StyledButton onClick={onShowUnMarked}>Unmarked TODOs</StyledButton>
+    <StyledButton onClick={onShowAll}>All TODOs</StyledButton>
+  </ButtonWrapper>
+);
+
+export default TodoButtons;
 
 TodoButtons.propTypes = {
   onShowMarked: propTypes.func,

@@ -1,4 +1,3 @@
-import React from 'react';
 import propTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -38,30 +37,30 @@ const DeleteButton = styled.button`
   }
 `;
 
-export default function TodoItem(props) {
-  return (
-    <Item>
-      <StyledInput
-        name={props.text}
-        type="checkbox"
-        id={props.id}
-        checked={props.complete}
-        value={props.text}
-        onChange={props.toggleComplete}
-      />
-      <label htmlFor={props.id}>
-        <StyledSpan
-          style={{
-            textDecoration: props.complete ? 'line-through' : 'none',
-          }}
-        >
-          {props.text}
-        </StyledSpan>
-      </label>
-      <DeleteButton onClick={props.onDeleteTask}> X </DeleteButton>
-    </Item>
-  );
-}
+const TodoItem = ({ id, text, complete, toggleComplete, onDeleteTask }) => (
+  <Item>
+    <StyledInput
+      name={text}
+      type="checkbox"
+      id={id}
+      checked={complete}
+      value={text}
+      onChange={toggleComplete}
+    />
+    <label htmlFor={id}>
+      <StyledSpan
+        style={{
+          textDecoration: complete ? 'line-through' : 'none',
+        }}
+      >
+        {text}
+      </StyledSpan>
+    </label>
+    <DeleteButton onClick={onDeleteTask}> X </DeleteButton>
+  </Item>
+);
+
+export default TodoItem;
 
 TodoItem.propTypes = {
   id: propTypes.number,

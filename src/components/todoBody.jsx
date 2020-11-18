@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import { Fragment, useState } from 'react';
 
 import TodoButtons from './todoButtons.jsx';
 import TodoItem from './todoItem';
@@ -34,17 +34,17 @@ const TodoBodyContainer = styled.div`
   }
 `;
 
-export default function TodoBody(props) {
+const TodoBody = ({ tasks, toggleComplete, deleteTask }) => {
   const [tasksToDisplay, updateTaskToDisplay] = useState('all');
 
-  let newtasks = props.tasks;
+  let newtasks = tasks;
 
   const showMarked = () => {
-    newtasks = props.tasks.filter((task) => task.complete);
+    newtasks = tasks.filter((task) => task.complete);
   };
 
   const showUnMarked = () => {
-    newtasks = props.tasks.filter((task) => !task.complete);
+    newtasks = tasks.filter((task) => !task.complete);
   };
 
   if (tasksToDisplay === 'marked') {
@@ -52,7 +52,7 @@ export default function TodoBody(props) {
   } else if (tasksToDisplay === 'unmarked') {
     showUnMarked();
   } else {
-    newtasks = props.tasks;
+    newtasks = tasks;
   }
 
   return (
@@ -68,15 +68,17 @@ export default function TodoBody(props) {
             key={task.id}
             id={task.id}
             complete={task.complete}
-            toggleComplete={() => props.toggleComplete(task.id)}
+            toggleComplete={() => toggleComplete(task.id)}
             text={task.text}
-            onDeleteTask={() => props.deleteTask(task.id)}
+            onDeleteTask={() => deleteTask(task.id)}
           />
         ))}
       </TodoBodyContainer>
     </Fragment>
   );
-}
+};
+
+export default TodoBody;
 
 TodoBody.propTypes = {
   tasks: propTypes.array,

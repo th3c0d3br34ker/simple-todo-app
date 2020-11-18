@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
-import TodoBody from "./todoBody.jsx";
-import TodoForm from "./todoForm.jsx";
-import styled from "styled-components";
+import TodoBody from './todoBody.jsx';
+import TodoForm from './todoForm.jsx';
+import styled from 'styled-components';
 
 const TodoHeadingWrapper = styled.div`
   display: grid;
@@ -15,18 +15,18 @@ const TodoMain = styled.div`
   height: 600px;
 `;
 
-export default function TodoApp() {
+const TodoApp = () => {
   const [tasks, setTask] = useState([]);
 
   useEffect(() => {
-    const data = JSON.parse(localStorage.getItem("todo-app-data"));
+    const data = JSON.parse(localStorage.getItem('todo-app-data'));
     if (data) {
       setTask(data);
     }
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("todo-app-data", JSON.stringify(tasks));
+    localStorage.setItem('todo-app-data', JSON.stringify(tasks));
   }, [tasks]);
 
   const addTodo = (task) => {
@@ -58,7 +58,7 @@ export default function TodoApp() {
         <h1>
           <span aria-label="note" role="img">
             📝
-          </span>{" "}
+          </span>{' '}
           TO DO APP
         </h1>
       </TodoHeadingWrapper>
@@ -70,4 +70,6 @@ export default function TodoApp() {
       />
     </TodoMain>
   );
-}
+};
+
+export default TodoApp;
